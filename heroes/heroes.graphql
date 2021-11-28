@@ -2,7 +2,7 @@ type Query{
     heroes: [Hero]
     hero(name: ID!): Hero
     heroByComplexity(complexity: Int!): [Hero]
-    compareTwoHeroes(hero_1: ID!,hero_2: ID!,compare: String!): [Hero]
+    compareTwoHeroes(hero_1: ID!,hero_2: ID!,role: String!): Winner
     heroByAttackType(attacktype: String!): [Hero]
     filterHeroes(parentType: Parent!,parameter: String!,minValue: Float!,maxValue: Float!): [Hero]
 }
@@ -18,6 +18,9 @@ enum Parent {
     roles
 }
 
+type Winner{
+    winner: String!
+}
 
 type Attribute{
     basestr: Int

@@ -1,4 +1,7 @@
 const {
+    json
+} = require('express');
+const {
     client
 } = require('../services/mongo');
 
@@ -32,8 +35,30 @@ async function getHeroesByComplexity(complexity) {
     })
 }
 
-async function compareTwoHeroes(hero_1, hero_2) {
+async function compareTwoHeroes(hero_1, hero_2, role) {
+    var winner;
+    const result = await getHeroesByParameter({
+        _id: {
+            $in: [hero_1, hero_2]
+        }
+    }, {
+        ['roles.' + role]: 1
+    })
 
+    if (result[0]['_id'] == hero_1)
+        if (result[0]['roles'][role] > result[1]['roles'][role])
+            winner = hero_1
+    else
+        winner = hero_2
+    else
+    if (result[0]['roles'][role] > result[1]['roles'][role])
+        winner = hero_2
+    else
+        winner = hero_1
+
+    return {
+        "winner": winner
+    };
 }
 
 async function getHeroesByAttackType(attacktype) {
@@ -42,12 +67,14 @@ async function getHeroesByAttackType(attacktype) {
     })
 }
 
-async function filterHeroesOnParameters(parentType,parameter,minValue,maxValue)
-{
-    var path = parentType+'.'+parameter;
+async function filterHeroesOnParameters(parentType, parameter, minValue, maxValue) {
+    var path = parentType + '.' + parameter;
     console.log(path);
     return await getHeroesByParameter({
-        [path]:{$gte: minValue, $lte: maxValue}
+        [path]: {
+            $gte: minValue,
+            $lte: maxValue
+        }
     })
 }
 
