@@ -5,15 +5,33 @@ const {
 const heroesDatabase = client.db("dotadictionary").collection('heroes');
 
 async function getAllHeroes() {
-    const hero = heroesDatabase.find({}).project({
-        _id: 1
-    });
+    const heroes = heroesDatabase.find({});
 
-    const result = await hero.toArray();
+    const result = await heroes.toArray();
     // console.log(result);
     return result;
 }
 
+async function getHeroById(name) {
+    const hero = heroesDatabase.findOne({
+        _id: name
+    });
+    return hero;
+}
+
+async function getHeroesByComplexity(complexity) {
+    complexity = Math.max(0, Math.min(complexity, 3));
+    const heroes = await heroesDatabase.find({
+        "roles.complexity":complexity
+    }).toArray();
+
+    return heroes;
+}
+
+
+
 module.exports = {
-    getAllHeroes
+    getAllHeroes,
+    getHeroById,
+    getHeroesByComplexity
 }

@@ -1,26 +1,25 @@
 type Query{
     heroes: [Hero]
+    hero(name: ID!): Hero
+    heroByComplexity(complexity: Int!): [Hero]
 }
 
 type Hero{
     _id: ID!
     attributes: Attribute
-    attack: Attack
-    defence: Defence
-    mobility: Mobility
     roles: Role
 }
 
 type Attribute{
-    basestr: Int!
-    baseagi: Int!
-    baseint: Int!
-    strgain: Float!
-    agigain: Float!
-    intgain: Float!
-    attackpoint: Float!
-    attackbackswing: Float!
-    baseattacktime: Float!
+    basestr: Int
+    baseagi: Int
+    baseint: Int
+    strgain: Float
+    agigain: Float
+    intgain: Float
+    attack: Attack
+    defence: Defence
+    mobility: Mobility
 }
 
 type Attack{
@@ -42,14 +41,14 @@ type Mobility{
 }
 
 type Role{
-    carry: Int!
-    nuker: Int!
-    initiator: Int!
-    disabler: Int!
-    durable: Int!
-    escape: Int!
-    support: Int!
-    pusher: Int!
-    jungler: Int!
-    complexity: Int!
+    carry: Int
+    nuker: Int
+    initiator: Int
+    disabler: Int
+    durable: Int
+    escape: Int
+    support: Int
+    pusher: Int
+    jungler: Int
+    complexity: Int
 }
