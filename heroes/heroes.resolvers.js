@@ -5,6 +5,12 @@ module.exports = {
         heroes: async () => {
             return await heroesModel.getAllHeroes();
         },
+        attributes:async () => {
+            return await heroesModel.getAllAttributes();
+        },
+        roles:async () => {
+            return await heroesModel.getAllRoles();
+        },
         hero: async (_,args) => {
             return await heroesModel.getHeroById(args.name);
         },

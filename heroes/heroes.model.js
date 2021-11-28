@@ -8,11 +8,18 @@ const {
 const heroesDatabase = client.db("dotadictionary").collection('heroes');
 
 async function getAllHeroes() {
-    const heroes = heroesDatabase.find({});
+    const heroes = heroesDatabase.find({}).project({
+        _id: 1
+    });
 
-    const result = await heroes.toArray();
-    // console.log(result);
-    return result;
+    // const result = await heroes.toArray();
+    // // console.log(result);
+    // return result;
+    var heroList = [];
+    (await heroes.toArray()).forEach((hero) => {
+        heroList.push(hero._id);
+    });
+    return heroList;
 }
 
 async function getHeroById(name) {
@@ -78,11 +85,28 @@ async function filterHeroesOnParameters(parentType, parameter, minValue, maxValu
     })
 }
 
+async function getAllAttributes() {
+    const result = await heroesDatabase.findOne({});
+
+    const attributes = Object.keys(result.attributes);
+    return attributes;
+}
+
+async function getAllRoles() {
+    const result = await heroesDatabase.findOne({});
+
+    const attributes = Object.keys(result.roles);
+    return attributes;
+}
+
+
 module.exports = {
     getAllHeroes,
     getHeroById,
     getHeroesByComplexity,
     compareTwoHeroes,
     getHeroesByAttackType,
-    filterHeroesOnParameters
+    filterHeroesOnParameters,
+    getAllAttributes,
+    getAllRoles,
 }

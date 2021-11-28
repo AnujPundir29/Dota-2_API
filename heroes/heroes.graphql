@@ -1,5 +1,7 @@
 type Query{
-    heroes: [Hero]
+    heroes: [String]
+    attributes: [String]
+    roles: [String]
     hero(name: ID!): Hero
     heroByComplexity(complexity: Int!): [Hero]
     compareTwoHeroes(hero_1: ID!,hero_2: ID!,role: String!): Winner
