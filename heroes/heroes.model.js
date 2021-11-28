@@ -5,12 +5,13 @@ const {
 const heroesDatabase = client.db("dotadictionary").collection('heroes');
 
 async function getAllHeroes() {
-    const result = heroesDatabase.find({}).project({
-        roles: 0,
-        attributes: 0
+    const hero = heroesDatabase.find({}).project({
+        _id: 1
     });
-    
-   return await result.toArray();
+
+    const result = await hero.toArray();
+    // console.log(result);
+    return result;
 }
 
 module.exports = {

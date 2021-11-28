@@ -4,4 +4,52 @@ type Query{
 
 type Hero{
     _id: ID!
+    attributes: Attribute
+    attack: Attack
+    defence: Defence
+    mobility: Mobility
+    roles: Role
+}
+
+type Attribute{
+    basestr: Int!
+    baseagi: Int!
+    baseint: Int!
+    strgain: Float!
+    agigain: Float!
+    intgain: Float!
+    attackpoint: Float!
+    attackbackswing: Float!
+    baseattacktime: Float!
+}
+
+type Attack{
+    basedmg: Float
+    attacktype: String
+    attackrange: Float
+}
+
+type Defence{
+    basearmor: Float
+    basemagicres: Float
+}
+
+type Mobility{
+    basemovespeed: Float
+    turnrate: Float
+    daysight: Int
+    nightsight: Int
+}
+
+type Role{
+    carry: Int!
+    nuker: Int!
+    initiator: Int!
+    disabler: Int!
+    durable: Int!
+    escape: Int!
+    support: Int!
+    pusher: Int!
+    jungler: Int!
+    complexity: Int!
 }
