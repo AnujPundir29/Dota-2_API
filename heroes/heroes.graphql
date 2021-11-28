@@ -2,6 +2,9 @@ type Query{
     heroes: [Hero]
     hero(name: ID!): Hero
     heroByComplexity(complexity: Int!): [Hero]
+    compareTwoHeroes(hero_1: ID!,hero_2: ID!,compare: String!): [Hero]
+    heroByAttackType(attacktype: String!): [Hero]
+    filterHeroes(parentType: Parent!,parameter: String!,minValue: Float!,maxValue: Float!): [Hero]
 }
 
 type Hero{
@@ -10,6 +13,12 @@ type Hero{
     roles: Role
 }
 
+enum Parent {
+    attributes
+    roles
+}
+
+
 type Attribute{
     basestr: Int
     baseagi: Int
@@ -17,28 +26,43 @@ type Attribute{
     strgain: Float
     agigain: Float
     intgain: Float
-    attack: Attack
-    defence: Defence
-    mobility: Mobility
-}
+    # attack: Attack
+    # defence: Defence
+    # mobility: Mobility
 
-type Attack{
+    # Attack
     basedmg: Float
     attacktype: String
     attackrange: Float
-}
 
-type Defence{
+    # Defence
     basearmor: Float
     basemagicres: Float
-}
 
-type Mobility{
+    # Mobility
     basemovespeed: Float
     turnrate: Float
     daysight: Int
     nightsight: Int
 }
+
+# type Attack{
+#     basedmg: Float
+#     attacktype: String
+#     attackrange: Float
+# }
+
+# type Defence{
+#     basearmor: Float
+#     basemagicres: Float
+# }
+
+# type Mobility{
+#     basemovespeed: Float
+#     turnrate: Float
+#     daysight: Int
+#     nightsight: Int
+# }
 
 type Role{
     carry: Int

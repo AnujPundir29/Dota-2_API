@@ -10,6 +10,15 @@ module.exports = {
         },
         heroByComplexity: async (_,args) => {
             return await heroesModel.getHeroesByComplexity(args.complexity);
-        }
+        },
+        // compareTwoHeroes: async (_,args) => {
+        //     return await heroesModel.compareTwoHeroes(args.hero_1,args.hero_2);
+        // },        
+        heroByAttackType: async (_,args) => {
+            return await heroesModel.getHeroesByAttackType(args.attacktype);
+        },
+        filterHeroes: async (_,args) => {
+            return await heroesModel.filterHeroesOnParameters(args.parentType,args.parameter,args.minValue,args.maxValue);
+        },
     }
 }
