@@ -38,8 +38,9 @@ async function startServer() {
         path: '/dota2'
     })
 
-    app.listen(3000,() => {
-        console.log('Apollo Server listening on port 3000...')
+    const PORT = process.env.PORT || 8000;
+    app.listen(PORT,() => {
+        console.log('Apollo Server listening on port ',PORT);
     })
 }
 
