@@ -35,7 +35,7 @@ async function startServer() {
 
     server.applyMiddleware({
         app,
-        path: '/'
+        path: '/*'
     })
 
     const PORT = process.env.PORT || 8000;
